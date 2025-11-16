@@ -1,5 +1,113 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>HollowCrown-Since 2023，start from 2025-11-16</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io</link><description>个人记录</description><copyright>HollowCrown-Since 2023，start from 2025-11-16</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/244284051?v=4</url><title>avatar</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io</link></image><lastBuildDate>Sun, 16 Nov 2025 06:49:19 +0000</lastBuildDate><managingEditor>HollowCrown-Since 2023，start from 2025-11-16</managingEditor><ttl>60</ttl><webMaster>HollowCrown-Since 2023，start from 2025-11-16</webMaster><item><title>2025.11.16-HostDare黑五特价机信息记录</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io/post/2025.11.16-HostDare-hei-wu-te-jia-ji-xin-xi-ji-lu.html</link><description>########################################################################
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>HollowCrown-Since 2023，start from 2025-11-16</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io</link><description>个人记录</description><copyright>HollowCrown-Since 2023，start from 2025-11-16</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/244284051?v=4</url><title>avatar</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io</link></image><lastBuildDate>Sun, 16 Nov 2025 07:59:50 +0000</lastBuildDate><managingEditor>HollowCrown-Since 2023，start from 2025-11-16</managingEditor><ttl>60</ttl><webMaster>HollowCrown-Since 2023，start from 2025-11-16</webMaster><item><title>2025.11.16Racknerd2025.6.1购买-DC03机房</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io/post/2025.11.16Racknerd2025.6.1-gou-mai--DC03-ji-fang.html</link><description>########################################################################
+                  bash &lt;(curl -sL https://run.NodeQuality.com)
+                   https://github.com/LloydAsp/NodeQuality
+        报告时间：2025-11-16 15:00:29 CST  脚本版本：v0.0.1
+        频道: https://t.me/nodeselect 网站：https://NodeQuality.com
+########################################################################
+
+
+Basic System Information:
+---------------------------------
+Uptime     : 165 days, 17 hours, 7 minutes
+Processor  : Intel(R) Xeon(R) CPU E5-2699 v4 @ 2.20GHz
+CPU cores  : 1 @ 2199.996 MHz
+AES-NI     : ✔ Enabled
+VM-x/AMD-V : ✔ Enabled
+RAM        : 957.4 MiB
+Swap       : 1024.0 MiB
+Disk       : 18.5 GiB
+Distro     : Debian GNU/Linux 12 (bookworm)
+Kernel     : 5.15.0-140-generic
+VM Type    : KVM
+IPv4/IPv6  : ✔ Online / ❌ Offline
+
+IPv4 Network Information:
+---------------------------------
+ISP        : HostPapa
+ASN        : AS36352 HostPapa
+Host       : Adi Kumar
+Location   : Los Angeles, California (CA)
+Country    : United States
+
+fio Disk Speed Tests (Mixed R/W 50/50) (Partition -):
+---------------------------------
+Block Size | 4k            (IOPS) | 64k           (IOPS)
+  ------   | ---            ----  | ----           ---- 
+Read       | 84.86 MB/s   (21.2k) | 916.58 MB/s  (14.3k)
+Write      | 85.09 MB/s   (21.2k) | 921.40 MB/s  (14.3k)
+Total      | 169.96 MB/s  (42.4k) | 1.83 GB/s    (28.7k)
+           |                      |                     
+Block Size | 512k          (IOPS) | 1m            (IOPS)
+  ------   | ---            ----  | ----           ---- 
+Read       | 1.73 GB/s     (3.3k) | 1.53 GB/s     (1.4k)
+Write      | 1.82 GB/s     (3.5k) | 1.63 GB/s     (1.5k)
+Total      | 3.56 GB/s     (6.9k) | 3.17 GB/s     (3.0k)
+
+Geekbench 5 Benchmark Test:
+---------------------------------
+Test            | Value                         
+                |                               
+Single Core     | 474                           
+Multi Core      | 471                           
+Full Test       | https://browser.geekbench.com/v5/cpu/23907190
+
+ SysBench CPU 测试 (Fast Mode, 1-Pass @ 5sec)
+---------------------------------
+ 1 线程测试(单核)得分:          578 Scores
+ SysBench 内存测试 (Fast Mode, 1-Pass @ 5sec)
+---------------------------------
+ 单线程读测试:          13807.03 MB/s
+ 单线程写测试:          9042.97 MB/s
+
+########################################################################
+                      IP质量体检报告：107.172.*.*
+                   https://github.com/xykt/IPQuality
+                bash &lt;(curl -sL https://Check.Place) -I
+        报告时间：2025-11-16 15:05:22 CST  脚本版本：v2025-11-06
+########################################################################
+一、基础信息（Maxmind 数据库）
+自治系统号：            AS36352
+组织：                  AS-COLOCROSSING
+坐标：                  118°14′38″W, 34°3′16″N
+地图：                  https://check.place/34.0544,-118.244,15,cn
+城市：                  加州, 洛杉矶, 90060
+使用地：                [US]美国, [NA]北美洲
+注册地：                [US]美国
+时区：                  America/Los_Angeles
+IP类型：                 原生IP 
+二、IP类型属性
+数据库：      IPinfo    ipregistry    ipapi    IP2Location   AbuseIPDB 
+使用类型：     机房        机房        机房        机房        机房    
+公司类型：     机房        机房        机房        机房    
+三、风险评分
+风险等级：      极低         低       中等       高         极高
+IP2Location：   3|低风险
+Scamalytics：  0|低风险
+ipapi：                                    3.75%|高风险
+AbuseIPDB：    0|低风险
+IPQS：                        75|可疑IP
+DB-IP：         |低风险
+四、风险因子
+库： IP2Location ipapi ipregistry IPQS Scamalytics ipdata IPinfo IPWHOIS
+地区：    [US]    [US]    [US]    [US]    [US]    [US]    [US]    [US]
+代理：     否      否      否      是      否      否      否      否 
+Tor：      否      否      否      否      否      否      否      否 
+VPN：      否      否      否      是      否      无      否      否 
+服务器：   是      是      是      无      是      否      是      是 
+滥用：     否      否      否      否      否      否      无      无 
+机器人：   否      否      无      否      否      无      无      无 
+五、流媒体及AI服务解锁检测
+服务商：  TikTok   Disney+  Netflix Youtube  AmazonPV  Spotify  ChatGPT 
+状态：     解锁     屏蔽     解锁     解锁     解锁     屏蔽     解锁   
+地区：     [US]              [US]     [US]     [US]              [US]   
+方式：     原生              原生     原生     原生              原生   
+六、邮局连通性及黑名单检测
+本地25端口出站：可用
+通信：+Gmail+Outlook+Yahoo+Apple-QQ+MailRU+AOL-GMX-MailCOM+163-Sohu+Sina
+IP地址黑名单数据库：  有效 439   正常 412   已标记 24   黑名单 3
+========================================================================
+今日IP检测量：556；总检测量：727205。</description><guid isPermaLink="true">https://HollowCrown2023.github.io/HollowCrown.github.io/post/2025.11.16Racknerd2025.6.1-gou-mai--DC03-ji-fang.html</guid><pubDate>Sun, 16 Nov 2025 07:48:52 +0000</pubDate></item><item><title>2025.11.16-HostDare黑五特价机信息记录</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io/post/2025.11.16-HostDare-hei-wu-te-jia-ji-xin-xi-ji-lu.html</link><description>########################################################################
                   bash &lt;(curl -sL https://run.NodeQuality.com)
                    https://github.com/LloydAsp/NodeQuality
         报告时间：2025-11-16 10:18:20 CST  脚本版本：v0.0.1
