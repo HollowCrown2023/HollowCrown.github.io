@@ -1,7 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>HollowCrown-Since 2023，start from 2025-11-16</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io</link><description>个人记录</description><copyright>HollowCrown-Since 2023，start from 2025-11-16</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/244284051?v=4</url><title>avatar</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io</link></image><lastBuildDate>Sun, 16 Nov 2025 06:45:54 +0000</lastBuildDate><managingEditor>HollowCrown-Since 2023，start from 2025-11-16</managingEditor><ttl>60</ttl><webMaster>HollowCrown-Since 2023，start from 2025-11-16</webMaster><item><title>2025.11.16-HostDare黑五特价机信息记录</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io/post/2025.11.16-HostDare-hei-wu-te-jia-ji-xin-xi-ji-lu.html</link><description># 💻基本信息
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>HollowCrown-Since 2023，start from 2025-11-16</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io</link><description>个人记录</description><copyright>HollowCrown-Since 2023，start from 2025-11-16</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/244284051?v=4</url><title>avatar</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io</link></image><lastBuildDate>Sun, 16 Nov 2025 06:49:19 +0000</lastBuildDate><managingEditor>HollowCrown-Since 2023，start from 2025-11-16</managingEditor><ttl>60</ttl><webMaster>HollowCrown-Since 2023，start from 2025-11-16</webMaster><item><title>2025.11.16-HostDare黑五特价机信息记录</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io/post/2025.11.16-HostDare-hei-wu-te-jia-ji-xin-xi-ji-lu.html</link><description>########################################################################
+                  bash &lt;(curl -sL https://run.NodeQuality.com)
+                   https://github.com/LloydAsp/NodeQuality
+        报告时间：2025-11-16 10:18:20 CST  脚本版本：v0.0.1
+        频道: https://t.me/nodeselect 网站：https://NodeQuality.com
+########################################################################
 
-```
+
 Basic System Information:
 ---------------------------------
 Uptime     : 4 days, 11 hours, 35 minutes
@@ -53,22 +58,53 @@ Full Test       | https://browser.geekbench.com/v5/cpu/23906882
 ---------------------------------
  单线程读测试:          44976.18 MB/s
  单线程写测试:          20202.32 MB/s
-```
 
-# 🎬IP质量
-
- ![image](https://i.111666.best/image/qCf331eMu1sLcM4hlrRa6u.webp)
-
-# 🌐网络质量
-
- ![image](https://i.111666.best/image/jZu3lVd61bosqMJK0Mk34s.webp)
-
-# 📍回程路由
-
- ![image](https://i.111666.best/image/wPQZFLXTaPyrteVMJXcJVA.webp)
-
-
-[[NodeQuality链接](https://nodequality.com/r/fh7N607YPXpz20ezueBMOvAUBDzNOgLr)](https://nodequality.com/r/fh7N607YPXpz20ezueBMOvAUBDzNOgLr)
-
-[NodeQualityResult.md](https://github.com/user-attachments/files/23566290/NodeQualityResult.md)。</description><guid isPermaLink="true">https://HollowCrown2023.github.io/HollowCrown.github.io/post/2025.11.16-HostDare-hei-wu-te-jia-ji-xin-xi-ji-lu.html</guid><pubDate>Sun, 16 Nov 2025 06:45:24 +0000</pubDate></item><item><title>2025.11.16第一篇博客</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io/post/2025.11.16-di-yi-pian-bo-ke.html</link><description>大三上Week10，周日
+########################################################################
+                       IP质量体检报告：45.12.*.*
+                   https://github.com/xykt/IPQuality
+                bash &lt;(curl -sL https://Check.Place) -I
+        报告时间：2025-11-16 10:34:56 CST  脚本版本：v2025-11-06
+########################################################################
+一、基础信息（Maxmind 数据库）
+自治系统号：            AS40065
+组织：                  CNSERVERS
+坐标：                  118°16′15″W, 34°3′5″N
+地图：                  https://check.place/34.0515,-118.2707,15,cn
+城市：                  加州, 洛杉矶, 90017
+使用地：                [US]美国, [NA]北美洲
+注册地：                [SG]新加坡
+时区：                  America/Los_Angeles
+IP类型：                 广播IP 
+二、IP类型属性
+数据库：      IPinfo    ipregistry    ipapi    IP2Location   AbuseIPDB 
+使用类型：     机房        机房        机房        机房        机房    
+公司类型：     机房        机房        机房        机房    
+三、风险评分
+风险等级：      极低         低       中等       高         极高
+IP2Location：   3|低风险
+Scamalytics：                                               100|极高风险
+ipapi：               0.59%|低风险
+AbuseIPDB：    0|低风险
+IPQS：                        75|可疑IP
+DB-IP：         |低风险
+四、风险因子
+库： IP2Location ipapi ipregistry IPQS Scamalytics ipdata IPinfo IPWHOIS
+地区：    [US]    [US]    [US]    [US]    [US]    [US]    [US]    [US]
+代理：     否      否      否      是      否      否      否      否 
+Tor：      否      否      否      否      否      否      否      否 
+VPN：      否      否      否      是      否      无      否      否 
+服务器：   是      是      是      无      否      否      是      是 
+滥用：     否      否      否      否      否      否      无      无 
+机器人：   否      否      无      否      否      无      无      无 
+五、流媒体及AI服务解锁检测
+服务商：  TikTok   Disney+  Netflix Youtube  AmazonPV  Spotify  ChatGPT 
+状态：     解锁     屏蔽     解锁     解锁     解锁     屏蔽     解锁   
+地区：     [US]              [US]     [US]     [US]              [US]   
+方式：     原生              原生     原生     原生              原生   
+六、邮局连通性及黑名单检测
+本地25端口出站：可用
+通信：+Gmail+Outlook+Yahoo+Apple-QQ+MailRU+AOL-GMX-MailCOM+163-Sohu+Sina
+IP地址黑名单数据库：  有效 439   正常 413   已标记 24   黑名单 2
+========================================================================
+今日IP检测量：150；总检测量：726799。</description><guid isPermaLink="true">https://HollowCrown2023.github.io/HollowCrown.github.io/post/2025.11.16-HostDare-hei-wu-te-jia-ji-xin-xi-ji-lu.html</guid><pubDate>Sun, 16 Nov 2025 06:45:24 +0000</pubDate></item><item><title>2025.11.16第一篇博客</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io/post/2025.11.16-di-yi-pian-bo-ke.html</link><description>大三上Week10，周日
 周五推出了RC，后面将全力集中在应试上。</description><guid isPermaLink="true">https://HollowCrown2023.github.io/HollowCrown.github.io/post/2025.11.16-di-yi-pian-bo-ke.html</guid><pubDate>Sun, 16 Nov 2025 06:27:35 +0000</pubDate></item></channel></rss>
