@@ -1,16 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>HollowCrown-Since 2023，start from 2025-11-16</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io</link><description>个人记录</description><copyright>HollowCrown-Since 2023，start from 2025-11-16</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/244284051?v=4</url><title>avatar</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io</link></image><lastBuildDate>Sun, 16 Nov 2025 11:39:13 +0000</lastBuildDate><managingEditor>HollowCrown-Since 2023，start from 2025-11-16</managingEditor><ttl>60</ttl><webMaster>HollowCrown-Since 2023，start from 2025-11-16</webMaster><item><title>手上目前几台机的IP质量检测</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io/post/shou-shang-mu-qian-ji-tai-ji-de-IP-zhi-liang-jian-ce.html</link><description>~~Dmit的ip测试中有几家欺诈检测机构不显示，很奇怪~~（是ipv6的结果，搞错了）
-#Dmit Malibu
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>HollowCrown-Since 2023，start from 2025-11-16</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io</link><description>个人记录</description><copyright>HollowCrown-Since 2023，start from 2025-11-16</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/244284051?v=4</url><title>avatar</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io</link></image><lastBuildDate>Sun, 16 Nov 2025 11:43:04 +0000</lastBuildDate><managingEditor>HollowCrown-Since 2023，start from 2025-11-16</managingEditor><ttl>60</ttl><webMaster>HollowCrown-Since 2023，start from 2025-11-16</webMaster><item><title>手上目前几台机的IP质量检测</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io/post/shou-shang-mu-qian-ji-tai-ji-de-IP-zhi-liang-jian-ce.html</link><description>~~Dmit的ip测试中有几家欺诈检测机构不显示，很奇怪~~（是ipv6的结果，搞错了）
+# Dmit Malibu
 &lt;img width='865' height='1148' alt='Image' src='https://github.com/user-attachments/assets/bbb204b4-dc2d-4765-9854-75c864aa350e' /&gt;
 &lt;img width='823' height='1060' alt='Image' src='https://github.com/user-attachments/assets/15e92093-a8bf-4480-a646-7cd0c72844c6' /&gt;
-#Racknerd 今年6.1买的机，最开始用来尝试自建节点
+# Racknerd 今年6.1买的机，最开始用来尝试自建节点
 ![Image](https://github.com/user-attachments/assets/4c35d040-e2d9-4755-ad51-3ae77184f2ae)
-#Hostdare
+# Hostdare
 ![Image](https://github.com/user-attachments/assets/9bdf2a53-cb2c-4bd5-9726-108596f25b87)
 Hostdare的ip在其中一个欺诈网站的检测分数为100，用浏览器访问reddit会被阻拦
-#Bandwagon Megabox
+# Bandwagon Megabox
 ![Image](https://github.com/user-attachments/assets/f99211f7-034e-4c56-a091-96ec30a20184)
-还有个lisa的特价年付产品，不过不好用，已经吃灰去了。</description><guid isPermaLink="true">https://HollowCrown2023.github.io/HollowCrown.github.io/post/shou-shang-mu-qian-ji-tai-ji-de-IP-zhi-liang-jian-ce.html</guid><pubDate>Sun, 16 Nov 2025 11:10:36 +0000</pubDate></item><item><title>2025.11.16Racknerd2025.6.1购买-DC03机房</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io/post/2025.11.16Racknerd2025.6.1-gou-mai--DC03-ji-fang.html</link><description>########################################################################
+
+~~还有个lisa的特价年付产品，不过不好用，已经吃灰去了~~。</description><guid isPermaLink="true">https://HollowCrown2023.github.io/HollowCrown.github.io/post/shou-shang-mu-qian-ji-tai-ji-de-IP-zhi-liang-jian-ce.html</guid><pubDate>Sun, 16 Nov 2025 11:10:36 +0000</pubDate></item><item><title>2025.11.16Racknerd2025.6.1购买-DC03机房</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io/post/2025.11.16Racknerd2025.6.1-gou-mai--DC03-ji-fang.html</link><description>########################################################################
                   bash &lt;(curl -sL https://run.NodeQuality.com)
                    https://github.com/LloydAsp/NodeQuality
         报告时间：2025-11-16 15:00:29 CST  脚本版本：v0.0.1
