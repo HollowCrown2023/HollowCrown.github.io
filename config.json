@@ -3,4 +3,6 @@
     "subTitle":"个人记录",
     "avatarUrl":"https://avatars.githubusercontent.com/u/244284051?v=4",
     "GMEEK_VERSION":"last"
+    "allHead":"<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekBSZ.js'></script>",
+    "allHead":"<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>",
 }
