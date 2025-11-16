@@ -2,7 +2,7 @@
     "title":"HollowCrown-Since 2023，start from 2025-11-16",
     "subTitle":"个人记录",
     "avatarUrl":"https://avatars.githubusercontent.com/u/244284051?v=4",
-    "GMEEK_VERSION":"last"
-    "allHead":"<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekBSZ.js'></script>",
+    "GMEEK_VERSION":"last",
+     "_comment": "以下添加浏览计数功能",
     "allHead":"<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>",
 }
