@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/244284051?v=4"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="这是原文的链接：https://www.nodeseek.com/post-499878-1
+
+# 粘贴复制原文：
+教程：如何使用 fail2ban 保护你的 Linux 服务器
+如果你在服务器的 lastb 日志中看到了成千上万条失败的登录记录，那么你正在遭受 SSH 暴力破解攻击。">
+<meta property="og:title" content="使用fail2ban保护自己的vps（依葫芦画瓢）">
+<meta property="og:description" content="这是原文的链接：https://www.nodeseek.com/post-499878-1
+
+# 粘贴复制原文：
+教程：如何使用 fail2ban 保护你的 Linux 服务器
+如果你在服务器的 lastb 日志中看到了成千上万条失败的登录记录，那么你正在遭受 SSH 暴力破解攻击。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://HollowCrown2023.github.io/HollowCrown.github.io/post/shi-yong-fail2ban-bao-hu-zi-ji-de-vps%EF%BC%88-yi-hu-lu-hua-piao-%EF%BC%89.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/244284051?v=4">
+<title>使用fail2ban保护自己的vps（依葫芦画瓢）</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">使用fail2ban保护自己的vps（依葫芦画瓢）</h1>
+<div class="title-right">
+    <a href="https://HollowCrown2023.github.io/HollowCrown.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/HollowCrown2023/HollowCrown.github.io/issues/6" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>这是原文的链接：<a href="https://www.nodeseek.com/post-499878-1" rel="nofollow">https://www.nodeseek.com/post-499878-1</a></p>
+<h1>粘贴复制原文：</h1>
+<p>教程：如何使用 fail2ban 保护你的 Linux 服务器<br>
+如果你在服务器的 lastb 日志中看到了成千上万条失败的登录记录，那么你正在遭受 SSH 暴力破解攻击。fail2ban 是一个自动化的“安保系统”，它会监控这些日志，并自动封禁那些恶意尝试的 IP 地址。</p>
+<p>本教程将指导你如何安装、配置 fail2ban，并设置一个严格且安全的策略。</p>
+<p>什么是 fail2ban？<br>
+你可以把 fail2ban 想象成一个“数字保镖”。</p>
+<p>它会实时读取你服务器的日志（如 /var/log/auth.log）。<br>
+当你设置的“规则”（Jail）被触发时（例如：10 分钟内，同一个 IP 登录 SSH 失败 3 次）。<br>
+它会立即调用防火墙（iptables）自动添加一条规则，将该 IP 封禁一段时间（例如 1 天）。<br>
+步骤 1：安装 fail2ban<br>
+首先，更新你的包列表并安装 fail2ban：</p>
+<p>sudo apt update<br>
+sudo apt install fail2ban -y<br>
+安装完成后，fail2ban 会自动启动并运行。我们还要设置它开机自启：</p>
+<p>sudo systemctl start fail2ban<br>
+sudo systemctl enable fail2ban<br>
+此时，fail2ban 已经在用它的默认配置保护你的 SSH 了。但默认配置通常太宽松，我们需要自定义它。</p>
+<p>步骤 2：创建你自己的配置文件（jail.local）<br>
+这是最重要的一步。fail2ban 的默认配置在 /etc/fail2ban/jail.conf。</p>
+<p><g-emoji class="g-emoji" alias="warning">⚠️</g-emoji> 警告：永远不要直接修改 jail.conf 文件！<br>
+因为 fail2ban 将来升级时，会覆盖这个文件，你所有的修改都会丢失。</p>
+<p>正确的做法是创建一个 jail.local 文件，这个文件中的配置会覆盖 jail.conf 中的同名设置，并且永远不会被升级覆盖。</p>
+<h1>使用 nano（或 vim）创建并编辑这个新文件</h1>
+<p>sudo nano /etc/fail2ban/jail.local<br>
+步骤 3：配置你的安全策略<br>
+将下面的全部内容复制并粘贴到你刚刚打开的 jail.local 文件中。每一项的含义都已在注释中详细说明。</p>
+<p>[DEFAULT]</p>
+<h1></h1>
+<h1>(重要) 白名单设置 (ignoreip):</h1>
+<h1>----------------------------------------------------</h1>
+<h1>用空格分隔的IP地址或网段列表。这些地址永远不会被封禁。</h1>
+<h1>127.0.0.1/8 ::1 是本地回环地址，必须保留。</h1>
+<h1></h1>
+<h1>!! 把 "YOUR_STATIC_IP_HERE" 替换成你自己的公网IP !!</h1>
+<h1>(在本地浏览器搜 "what is my ip" 找到它)</h1>
+<h1></h1>
+<p>ignoreip = 127.0.0.1/8 ::1 YOUR_STATIC_IP_HERE</p>
+<h1></h1>
+<h1>封禁时间 (bantime):</h1>
+<h1>----------------------------------------------------</h1>
+<h1>默认封禁 10 分钟太短了，攻击者很快就会回来。</h1>
+<h1>1d = 1 天</h1>
+<h1>1h = 1 小时</h1>
+<h1></h1>
+<p>bantime = 1d</p>
+<h1></h1>
+<h1>寻找时间 (findtime):</h1>
+<h1>----------------------------------------------------</h1>
+<h1>在这段时间内达到 "maxretry" 次数就会被封禁。</h1>
+<h1></h1>
+<p>findtime = 10m</p>
+<h1></h1>
+<h1>最大尝试次数 (maxretry):</h1>
+<h1>----------------------------------------------------</h1>
+<h1>默认的 5 次太宽容了。我们设为 3 次。</h1>
+<h1></h1>
+<p>maxretry = 3</p>
+<h1></h1>
+<h1>[sshd] - 针对 SSH 服务的特定设置</h1>
+<h1>----------------------------------------------------</h1>
+<h1>默认情况下 [DEFAULT] 区的设置会应用到所有服务，</h1>
+<h1>我们在这里明确启用 sshd 监狱（Jail）。</h1>
+<h1></h1>
+<p>[sshd]<br>
+enabled = true<br>
+配置说明：<br>
+我们这份配置的含义是：</p>
+<p>“对于 SSH 服务，如果任何一个 IP 地址（不在白名单 ignoreip 内）在 10 分钟（findtime）内登录失败达到 3 次（maxretry），则立即封禁该 IP 1 天（bantime）。”</p>
+<p>保存并退出：<br>
+在 nano 编辑器中，按 Ctrl + O，回车（Enter）保存，然后按 Ctrl + X 退出。</p>
+<p>步骤 4：重启 fail2ban 使配置生效<br>
+这是必须的一步，否则你的 jail.local 配置不会被加载。</p>
+<p>sudo systemctl restart fail2ban<br>
+步骤 5：验证 fail2ban 是否在工作<br>
+等待几分钟，让 fail2ban 开始读取日志并抓捕那些攻击者。然后运行以下命令：</p>
+<h1>检查 sshd "监狱" (Jail) 的状态</h1>
+<p>sudo fail2ban-client status sshd<br>
+✅ 输出示例（刚启动时）：<br>
+Status for the jail: sshd<br>
+|- Filter<br>
+| |- Currently failed: 0<br>
+| |- Total failed: 0<br>
+| <code class="notranslate">- File list: /var/log/auth.log </code>- Actions<br>
+|- Currently banned: 0<br>
+|- Total banned: 0<br>
+<code class="notranslate">- Banned IP list: ✅ 运行一段时间后（成功封禁）： Status for the jail: sshd |- Filter | |- Currently failed: 2 | |- Total failed: 1392 | </code>- File list: /var/log/auth.log<br>
+<code class="notranslate">- Actions |- Currently banned: 14 &lt;-- 成功封禁了 14 个 IP |- Total banned: 58 </code>- Banned IP list: 116.88.x.x 104.22.x.x ...<br>
+当你看到 Banned IP list 中出现 IP 地址时，恭喜你，你的“安保系统”已经开始自动工作了！</p>
+<p>（附）紧急情况：如何解封你自己的 IP？<br>
+如果你不小心把自己锁在了外面（例如，你没有设置白名单，然后在手机上输错了 3 次密码），你需要通过其他方式（如云服务商的 VNC 控制台）登录服务器，然后执行以下命令：</p>
+<h1>假如你不小心封了 IP "8.8.8.8"</h1>
+<p>sudo fail2ban-client set sshd unbanip 8.8.8.8<br>
+这条命令会立即将该 IP 从 sshd 监狱中解封。</p>
+<h1>补充：</h1>
+<p>我的几个vps都是装的Ubuntu，按照原帖的内容无法正确重启，以下是我修改了的内容：<br>
+[DEFAULT]</p>
+<h1></h1>
+<p>#(重要)白名单设置(ignoreip):</p>
+<h1>----------------------------------------------------</h1>
+<h1>用空格分隔的IP地址或网段列表。这些地址永远不会被封禁。</h1>
+<h1>127.0.0.1/8 ::1 是本地回环地址，必须保留</h1>
+<h1></h1>
+<h2>!! 把 "YOUR_STATIC_IP_HERE" 替换成你自己的公网IP !!</h2>
+<h1>(在本地浏览器搜 "what is my ip" 找到它)</h1>
+<h1></h1>
+<p>ignoreip = 127.0.0.1/8 ::1 144.34.237.48 45.12.90.139 107.172.238.201 154.17.3.170</p>
+<h1></h1>
+<h1>封禁时间 (bantime):</h1>
+<h1>----------------------------------------------------</h1>
+<h1>默认封禁 10 分钟太短了，攻击者很快就会回来。</h1>
+<h1>1d = 1 天</h1>
+<h1>1h = 1 小时</h1>
+<h1></h1>
+<p>bantime = 1d</p>
+<h2>寻找时间 (findtime):</h2>
+<h1>----------------------------------------------------</h1>
+<h1>在这段时间内达到 "maxretry" 次数就会被封禁。</h1>
+<h1></h1>
+<p>findtime = 10m</p>
+<h1>最大尝试次数 (maxretry):</h1>
+<h1>----------------------------------------------------</h1>
+<h1>默认的 5 次太宽容了。我们设为 3 次。</h1>
+<p>maxretry = 5</p>
+<h1>[sshd] - 针对 SSH 服务的特定设置</h1>
+<h1>----------------------------------------------------</h1>
+<h1>默认情况下 [DEFAULT] 区的设置会应用到所有服务，</h1>
+<h1>我们在这里明确启用 sshd 监狱（Jail）。</h1>
+<p>[sshd]<br>
+enabled = true<br>
+backend = systemd</p>
+<p>主要是最后一句 backend = systemd ，GPT给的解答如下：<br>
+报错已经变成：</p>
+<p>Have not found any log file for sshd jail</p>
+<p>说明当前问题是：[sshd] 这个 jail 被启用了，但 Fail2ban 找不到它要监控的 SSH 日志文件，所以启动直接失败退出。</p>
+<p>本质上有两种典型情况：</p>
+<p>Fail2ban 按“看文件”的方式工作，但你系统上没有 /var/log/auth.log（或对应的 sshd 日志文件）；</p>
+<p>后端本来应该用 systemd 读 journal，却没有配置好/没启用。</p>
+<p>你现在的 jail.local 只有：</p>
+<p>[sshd]<br>
+enabled = true</p>
+<p>启用了 jail，但没有告诉它“从哪里看日志”，于是它去继承默认配置。如果默认配置指向了一个不存在的日志文件，就会报这个错。<br>
+下面给一个稳妥的修改方案。</p>
+<p>第一步：修改 [sshd]，强制使用 systemd 后端</p>
+<p>在多数现代 Debian/Ubuntu 系统上，SSH 日志写在 systemd 的 journal 里，用 Fail2ban 内置的 systemd 后端最简单。</p>
+<p>编辑配置：</p>
+<p>sudo nano /etc/fail2ban/jail.local</p>
+<p>把末尾改成类似下面这样（连同前面的 DEFAULT 一并给你一个完整参考）：</p>
+<p>[DEFAULT]<br>
+ignoreip = 127.0.0.1/8 ::1 144.34.237.48 45.12.90.139 107.172.238.201 154.17.3.170<br>
+bantime  = 1d<br>
+findtime = 10m<br>
+maxretry = 5</p>
+<p>[sshd]<br>
+enabled = true<br>
+backend = systemd</p>
+<h1>不在这里写 logpath，让它走 systemd 后端读 journal</h1>
+<p>保存退出后，重启 Fail2ban：</p>
+<p>sudo systemctl restart fail2ban<br>
+sudo systemctl status fail2ban</p>
+<p>如果一切正常，应看到：</p>
+<p>Active: active (running)</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://HollowCrown2023.github.io/HollowCrown.github.io">HollowCrown-Since 2023，start from 2025-11-16</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","HollowCrown2023/HollowCrown.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekTOC.js'></script><script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script>
+
+</html>
