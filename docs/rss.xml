@@ -1,5 +1,82 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>HollowCrown-Since 2023，start from 2025-11-16</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io</link><description>个人记录</description><copyright>HollowCrown-Since 2023，start from 2025-11-16</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/244284051?v=4</url><title>avatar</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io</link></image><lastBuildDate>Tue, 18 Nov 2025 07:31:13 +0000</lastBuildDate><managingEditor>HollowCrown-Since 2023，start from 2025-11-16</managingEditor><ttl>60</ttl><webMaster>HollowCrown-Since 2023，start from 2025-11-16</webMaster><item><title>记录-DMIT Malibu 被装了挖矿木马（应该是）</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io/post/ji-lu--DMIT%20Malibu%20-bei-zhuang-le-wa-kuang-mu-ma-%EF%BC%88-ying-gai-shi-%EF%BC%89.html</link><description>一大早telegram 面板机器人给我疯狂报cpu满载，从晚上十二点整开始报的，用GPT给的命令查到一个进程，但查不到具体信息，GPT问诊说是挖矿木马，遂重装系统，用手机重新配了一遍面板，装了fail2ban
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>HollowCrown-Since 2023，start from 2025-11-16</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io</link><description>个人记录</description><copyright>HollowCrown-Since 2023，start from 2025-11-16</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/244284051?v=4</url><title>avatar</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io</link></image><lastBuildDate>Tue, 18 Nov 2025 10:42:24 +0000</lastBuildDate><managingEditor>HollowCrown-Since 2023，start from 2025-11-16</managingEditor><ttl>60</ttl><webMaster>HollowCrown-Since 2023，start from 2025-11-16</webMaster><item><title>记录一个reality选址脚本</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io/post/ji-lu-yi-ge-reality-xuan-zhi-jiao-ben.html</link><description>原文地址：https://linux.do/t/topic/996455
+
+# New chat
+
+**User:** syx (邮箱)  
+**Created:** 11/18/2025 18:27:53  
+**Updated:** 11/18/2025 18:29:02  
+**Exported:** 11/18/2025 18:35:55  
+**Link:** [https://chatgpt.com/c/691c4a09-f7b4-832d-b1c7-5c005d429345](https://chatgpt.com/c/691c4a09-f7b4-832d-b1c7-5c005d429345)  
+
+## Prompt:
+
+#!/bin/bash
+
+# 脚本在任何命令失败时立即退出
+
+set -e
+
+# --- 配置 ---
+
+LOG_FILE='reality-check.log'
+REALI_TL_SCANNER_VERSION='v0.2.1'
+REALI_TL_SCANNER_URL='https://github.com/XTLS/RealiTLScanner/releases/download/${REALI_TL_SCANNER_VERSION}/RealiTLScanner-linux-64'
+REALI_TL_SCANNER_BIN='RealiTLScanner-linux-64'
+REALITY_CHECKER_BIN='reality-checker'
+
+# --- 颜色定义 ---
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+# --- 函数定义 ---
+
+# 日志记录函数
+
+log() {
+    echo -e '$1' | tee -a '${LOG_FILE}'
+}
+
+# 错误处理函数
+
+error_exit() {
+    log '${RED}错误: $1${NC}'
+    exit 1
+}
+
+# 清理函数
+
+cleanup() {
+    log '${YELLOW}--- 开始清理下载的临时文件 ---${NC}'
+    rm -f '${REALI_TL_SCANNER_BIN}' '${REALITY_CHECKER_BIN}' 'reality-checker-linux-*.zip'
+    log '${GREEN}--- 清理完成 ---${NC}'
+}
+
+# 依赖安装函数，自动检测包管理器
+
+install_dependencies() {
+    log '正在检测包管理器并安装依赖...'
+    # 检查并安装 coreutils (为了 timeout 命令)
+    local pkgs='unzip curl wget coreutils'
+
+    if command -v apt-get &amp;&gt; /dev/null; then
+        log '检测到 apt-get (Debian/Ubuntu)，正在更新和安装...'
+        apt-get update &gt; /dev/null
+        apt-get install -y $pkgs
+    elif command -v dnf &amp;&gt; /dev/null; then
+        log '检测到 dnf (Fedora/RHEL)，正在安装...'
+        dnf install -y $pkgs
+    elif command -v yum &amp;&gt; /dev/null; then
+        log '检测到 yum (CentOS)，正在安装...'
+        yum install -y $pkgs
+    elif command -v pacman &amp;&gt; /dev/null; then
+        log '检测到 pacman (Arch Linux)，正在更新和安装...'
+        pacman -Syu --noconfirm $pkgs
+    else
+        error_exit '未能检测到支持的包管理器 (apt/dnf/yum/pacman)。</description><guid isPermaLink="true">https://HollowCrown2023.github.io/HollowCrown.github.io/post/ji-lu-yi-ge-reality-xuan-zhi-jiao-ben.html</guid><pubDate>Tue, 18 Nov 2025 10:41:54 +0000</pubDate></item><item><title>记录-DMIT Malibu 被装了挖矿木马（应该是）</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io/post/ji-lu--DMIT%20Malibu%20-bei-zhuang-le-wa-kuang-mu-ma-%EF%BC%88-ying-gai-shi-%EF%BC%89.html</link><description>一大早telegram 面板机器人给我疯狂报cpu满载，从晚上十二点整开始报的，用GPT给的命令查到一个进程，但查不到具体信息，GPT问诊说是挖矿木马，遂重装系统，用手机重新配了一遍面板，装了fail2ban
 
 目前搞不清楚到底是什么情况被爆了，可能是昨天我尝试着装Xray推荐的各种面板导致的，尤其是那个hiddify，装的巨慢，后面我直接取消安装了，但是ssh登进去，默认目录带着hiddify这几个字，有可能是中途有什么东西因为被我终止导致没有配置完成留下的漏洞。</description><guid isPermaLink="true">https://HollowCrown2023.github.io/HollowCrown.github.io/post/ji-lu--DMIT%20Malibu%20-bei-zhuang-le-wa-kuang-mu-ma-%EF%BC%88-ying-gai-shi-%EF%BC%89.html</guid><pubDate>Tue, 18 Nov 2025 07:30:44 +0000</pubDate></item><item><title>使用fail2ban保护自己的vps（依葫芦画瓢）</title><link>https://HollowCrown2023.github.io/HollowCrown.github.io/post/shi-yong-fail2ban-bao-hu-zi-ji-de-vps%EF%BC%88-yi-hu-lu-hua-piao-%EF%BC%89.html</link><description>这是原文的链接：https://www.nodeseek.com/post-499878-1
 

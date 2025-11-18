@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/244284051?v=4"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="原文地址：https://linux.do/t/topic/996455
+
+# New chat
+
+**User:** syx (邮箱)  
+**Created:** 11/18/2025 18:27:53  
+**Updated:** 11/18/2025 18:29:02  
+**Exported:** 11/18/2025 18:35:55  
+**Link:** [https://chatgpt.com/c/691c4a09-f7b4-832d-b1c7-5c005d429345](https://chatgpt.com/c/691c4a09-f7b4-832d-b1c7-5c005d429345)  
+
+## Prompt:
+
+#!/bin/bash
+
+# 脚本在任何命令失败时立即退出
+
+set -e
+
+# --- 配置 ---
+
+LOG_FILE='reality-check.log'
+REALI_TL_SCANNER_VERSION='v0.2.1'
+REALI_TL_SCANNER_URL='https://github.com/XTLS/RealiTLScanner/releases/download/${REALI_TL_SCANNER_VERSION}/RealiTLScanner-linux-64'
+REALI_TL_SCANNER_BIN='RealiTLScanner-linux-64'
+REALITY_CHECKER_BIN='reality-checker'
+
+# --- 颜色定义 ---
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+# --- 函数定义 ---
+
+# 日志记录函数
+
+log() {
+    echo -e '$1' | tee -a '${LOG_FILE}'
+}
+
+# 错误处理函数
+
+error_exit() {
+    log '${RED}错误: $1${NC}'
+    exit 1
+}
+
+# 清理函数
+
+cleanup() {
+    log '${YELLOW}--- 开始清理下载的临时文件 ---${NC}'
+    rm -f '${REALI_TL_SCANNER_BIN}' '${REALITY_CHECKER_BIN}' 'reality-checker-linux-*.zip'
+    log '${GREEN}--- 清理完成 ---${NC}'
+}
+
+# 依赖安装函数，自动检测包管理器
+
+install_dependencies() {
+    log '正在检测包管理器并安装依赖...'
+    # 检查并安装 coreutils (为了 timeout 命令)
+    local pkgs='unzip curl wget coreutils'
+
+    if command -v apt-get &> /dev/null; then
+        log '检测到 apt-get (Debian/Ubuntu)，正在更新和安装...'
+        apt-get update > /dev/null
+        apt-get install -y $pkgs
+    elif command -v dnf &> /dev/null; then
+        log '检测到 dnf (Fedora/RHEL)，正在安装...'
+        dnf install -y $pkgs
+    elif command -v yum &> /dev/null; then
+        log '检测到 yum (CentOS)，正在安装...'
+        yum install -y $pkgs
+    elif command -v pacman &> /dev/null; then
+        log '检测到 pacman (Arch Linux)，正在更新和安装...'
+        pacman -Syu --noconfirm $pkgs
+    else
+        error_exit '未能检测到支持的包管理器 (apt/dnf/yum/pacman)。">
+<meta property="og:title" content="记录一个reality选址脚本">
+<meta property="og:description" content="原文地址：https://linux.do/t/topic/996455
+
+# New chat
+
+**User:** syx (邮箱)  
+**Created:** 11/18/2025 18:27:53  
+**Updated:** 11/18/2025 18:29:02  
+**Exported:** 11/18/2025 18:35:55  
+**Link:** [https://chatgpt.com/c/691c4a09-f7b4-832d-b1c7-5c005d429345](https://chatgpt.com/c/691c4a09-f7b4-832d-b1c7-5c005d429345)  
+
+## Prompt:
+
+#!/bin/bash
+
+# 脚本在任何命令失败时立即退出
+
+set -e
+
+# --- 配置 ---
+
+LOG_FILE='reality-check.log'
+REALI_TL_SCANNER_VERSION='v0.2.1'
+REALI_TL_SCANNER_URL='https://github.com/XTLS/RealiTLScanner/releases/download/${REALI_TL_SCANNER_VERSION}/RealiTLScanner-linux-64'
+REALI_TL_SCANNER_BIN='RealiTLScanner-linux-64'
+REALITY_CHECKER_BIN='reality-checker'
+
+# --- 颜色定义 ---
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+# --- 函数定义 ---
+
+# 日志记录函数
+
+log() {
+    echo -e '$1' | tee -a '${LOG_FILE}'
+}
+
+# 错误处理函数
+
+error_exit() {
+    log '${RED}错误: $1${NC}'
+    exit 1
+}
+
+# 清理函数
+
+cleanup() {
+    log '${YELLOW}--- 开始清理下载的临时文件 ---${NC}'
+    rm -f '${REALI_TL_SCANNER_BIN}' '${REALITY_CHECKER_BIN}' 'reality-checker-linux-*.zip'
+    log '${GREEN}--- 清理完成 ---${NC}'
+}
+
+# 依赖安装函数，自动检测包管理器
+
+install_dependencies() {
+    log '正在检测包管理器并安装依赖...'
+    # 检查并安装 coreutils (为了 timeout 命令)
+    local pkgs='unzip curl wget coreutils'
+
+    if command -v apt-get &> /dev/null; then
+        log '检测到 apt-get (Debian/Ubuntu)，正在更新和安装...'
+        apt-get update > /dev/null
+        apt-get install -y $pkgs
+    elif command -v dnf &> /dev/null; then
+        log '检测到 dnf (Fedora/RHEL)，正在安装...'
+        dnf install -y $pkgs
+    elif command -v yum &> /dev/null; then
+        log '检测到 yum (CentOS)，正在安装...'
+        yum install -y $pkgs
+    elif command -v pacman &> /dev/null; then
+        log '检测到 pacman (Arch Linux)，正在更新和安装...'
+        pacman -Syu --noconfirm $pkgs
+    else
+        error_exit '未能检测到支持的包管理器 (apt/dnf/yum/pacman)。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://HollowCrown2023.github.io/HollowCrown.github.io/post/ji-lu-yi-ge-reality-xuan-zhi-jiao-ben.html">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/244284051?v=4">
+<title>记录一个reality选址脚本</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">记录一个reality选址脚本</h1>
+<div class="title-right">
+    <a href="https://HollowCrown2023.github.io/HollowCrown.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/HollowCrown2023/HollowCrown.github.io/issues/8" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>原文地址：<a href="https://linux.do/t/topic/996455" rel="nofollow">https://linux.do/t/topic/996455</a></p>
+<h1>New chat</h1>
+<p><strong>User:</strong> syx (邮箱)<br>
+<strong>Created:</strong> 11/18/2025 18:27:53<br>
+<strong>Updated:</strong> 11/18/2025 18:29:02<br>
+<strong>Exported:</strong> 11/18/2025 18:35:55<br>
+<strong>Link:</strong> <a href="https://chatgpt.com/c/691c4a09-f7b4-832d-b1c7-5c005d429345" rel="nofollow">https://chatgpt.com/c/691c4a09-f7b4-832d-b1c7-5c005d429345</a></p>
+<h2>Prompt:</h2>
+<p>#!/bin/bash</p>
+<h1>脚本在任何命令失败时立即退出</h1>
+<p>set -e</p>
+<h1>--- 配置 ---</h1>
+<p>LOG_FILE="reality-check.log"<br>
+REALI_TL_SCANNER_VERSION="v0.2.1"<br>
+REALI_TL_SCANNER_URL="<a href="https://github.com/XTLS/RealiTLScanner/releases/download/$%7BREALI_TL_SCANNER_VERSION%7D/RealiTLScanner-linux-64">https://github.com/XTLS/RealiTLScanner/releases/download/${REALI_TL_SCANNER_VERSION}/RealiTLScanner-linux-64</a>"<br>
+REALI_TL_SCANNER_BIN="RealiTLScanner-linux-64"<br>
+REALITY_CHECKER_BIN="reality-checker"</p>
+<h1>--- 颜色定义 ---</h1>
+<p>RED='\033[0;31m'<br>
+GREEN='\033[0;32m'<br>
+YELLOW='\033[0;33m'<br>
+NC='\033[0m' # No Color</p>
+<h1>--- 函数定义 ---</h1>
+<h1>日志记录函数</h1>
+<p>log() {<br>
+echo -e "$1" | tee -a "${LOG_FILE}"<br>
+}</p>
+<h1>错误处理函数</h1>
+<p>error_exit() {<br>
+log "${RED}错误: $1${NC}"<br>
+exit 1<br>
+}</p>
+<h1>清理函数</h1>
+<p>cleanup() {<br>
+log "${YELLOW}--- 开始清理下载的临时文件 ---${NC}"<br>
+rm -f "${REALI_TL_SCANNER_BIN}" "${REALITY_CHECKER_BIN}" "reality-checker-linux-*.zip"<br>
+log "${GREEN}--- 清理完成 ---${NC}"<br>
+}</p>
+<h1>依赖安装函数，自动检测包管理器</h1>
+<p>install_dependencies() {<br>
+log "正在检测包管理器并安装依赖..."<br>
+# 检查并安装 coreutils (为了 timeout 命令)<br>
+local pkgs="unzip curl wget coreutils"</p>
+<pre class="notranslate"><code class="notranslate">if command -v apt-get &amp;&gt; /dev/null; then
+    log "检测到 apt-get (Debian/Ubuntu)，正在更新和安装..."
+    apt-get update &gt; /dev/null
+    apt-get install -y $pkgs
+elif command -v dnf &amp;&gt; /dev/null; then
+    log "检测到 dnf (Fedora/RHEL)，正在安装..."
+    dnf install -y $pkgs
+elif command -v yum &amp;&gt; /dev/null; then
+    log "检测到 yum (CentOS)，正在安装..."
+    yum install -y $pkgs
+elif command -v pacman &amp;&gt; /dev/null; then
+    log "检测到 pacman (Arch Linux)，正在更新和安装..."
+    pacman -Syu --noconfirm $pkgs
+else
+    error_exit "未能检测到支持的包管理器 (apt/dnf/yum/pacman)。请手动安装: $pkgs"
+fi
+log "${GREEN}依赖安装完成。${NC}"
+</code></pre>
+<p>}</p>
+<h1>--- 主逻辑 ---</h1>
+<h1>将所有输出重定向到日志文件和屏幕</h1>
+<p>exec &amp;&gt; &gt;(tee -a "${LOG_FILE}")<br>
+exec 2&gt;&amp;1</p>
+<p>echo "--- Reality 检测脚本开始执行 ---"<br>
+date</p>
+<h1>检查是否以root用户运行</h1>
+<p>if [ "$(id -u)" -ne 0 ]; then<br>
+error_exit "此脚本需要以 root 权限运行。"<br>
+fi</p>
+<h1>注册清理函数，在脚本退出时执行</h1>
+<p>trap cleanup EXIT</p>
+<p>install_dependencies</p>
+<p>log "${GREEN}--- 步骤 2: 获取本机公网IP ---${NC}"<br>
+My_Ip=$(curl -s <a href="https://api.ipify.org/" rel="nofollow">https://api.ipify.org/</a>)<br>
+if [ -z "${My_Ip}" ]; then<br>
+error_exit "无法获取服务器的公网IP地址。"<br>
+fi<br>
+log "本机公网IP: ${My_Ip}"<br>
+log "将使用本机公网IP作为检测目标。"<br>
+Reality_Ip="${My_Ip}"</p>
+<p>log "${GREEN}--- 步骤 3: 下载并准备 RealiTLScanner ---${NC}"<br>
+wget -q --show-progress -O "${REALI_TL_SCANNER_BIN}" "${REALI_TL_SCANNER_URL}"<br>
+chmod +x "${REALI_TL_SCANNER_BIN}"</p>
+<p>log "${GREEN}--- 步骤 4: 运行 RealiTLScanner (最大执行时间3分钟) ---${NC}"<br>
+log "正在扫描本机 ${Reality_Ip}:443 ..."</p>
+<h1>该指令，设置一个执行最大时间为3m</h1>
+<h1>My_Ip为服务器的公网IP地址</h1>
+<p>timeout 3m ./"${REALI_TL_SCANNER_BIN}" -addr "${My_Ip}" -port 443 -thread 100 -timeout 5 -out "${Reality_Ip}.csv" || log "${YELLOW}RealiTLScanner 运行超时或被中断，这可能是正常的。${NC}"</p>
+<p>log "${GREEN}--- 步骤 5: 下载并准备 RealityChecker (根据系统架构) ---${NC}"</p>
+<h1>根据自己的系统架构下载相对应的版本</h1>
+<p>ARCH=$(uname -m)<br>
+REALITY_CHECKER_URL=""<br>
+if [ "$ARCH" = "x86_64" ]; then<br>
+log "检测到系统架构为 x86_64 (amd64)，下载对应版本。"<br>
+REALITY_CHECKER_URL="<a href="https://github.com/V2RaySSR/RealityChecker/releases/latest/download/reality-checker-linux-amd64.zip">https://github.com/V2RaySSR/RealityChecker/releases/latest/download/reality-checker-linux-amd64.zip</a>"<br>
+wget -q --show-progress "${REALITY_CHECKER_URL}"<br>
+unzip -o reality-checker-linux-amd64.zip<br>
+elif [ "$ARCH" = "aarch64" ]; then<br>
+log "检测到系统架构为 aarch64 (arm64)，下载对应版本。"<br>
+REALITY_CHECKER_URL="<a href="https://github.com/V2RaySSR/RealityChecker/releases/latest/download/reality-checker-linux-arm64.zip">https://github.com/V2RaySSR/RealityChecker/releases/latest/download/reality-checker-linux-arm64.zip</a>"<br>
+wget -q --show-progress "${REALITY_CHECKER_URL}"<br>
+unzip -o reality-checker-linux-arm64.zip<br>
+else<br>
+error_exit "不支持的系统架构: $ARCH"<br>
+fi</p>
+<p>chmod +x "${REALITY_CHECKER_BIN}"</p>
+<p>log "${GREEN}--- 步骤 6: 运行 RealityChecker 并保存结果 ---${NC}"</p>
+<h1>开始检测 并将该检测结果保存到一个文件中以便查看</h1>
+<p>./"${REALITY_CHECKER_BIN}" csv "${Reality_Ip}.csv"</p>
+<p>log "${GREEN}--- 检测完成 ---${NC}"<br>
+log "详细日志请查看: ${LOG_FILE}"<br>
+log "扫描结果CSV文件: ${Reality_Ip}.csv"</p>
+<p>以上是一个脚本内容，帮我分析一下干了什么，以及如何使用？</p>
+<h2>Response:</h2>
+<p>已思考 17s</p>
+<p>先给结论：<br>
+这个脚本的作用是在你的服务器上，自动完成「Reality 扫描 + 校验」，看你这台机子（默认：本机公网 IP 的 443 端口）是否适合作为 Reality 伪装 / 中转用的目标，并把结果产出为一个 CSV 文件，同时把整个过程的日志记录下来，最后把下载的工具清理掉。</p>
+<p>下面分两块说：一块是“脚本干了什么”，一块是“你怎么用”。</p>
+<hr>
+<h2>一、脚本整体流程在干什么</h2>
+<h3>0. 全局设置、变量和颜色</h3>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c1">set</span> -e               <span class="pl-c"><span class="pl-c">#</span> 任意普通命令出错就退出脚本（后面有特例）</span>
+LOG_FILE=<span class="pl-s"><span class="pl-pds">"</span>reality-check.log<span class="pl-pds">"</span></span>
+REALI_TL_SCANNER_VERSION=<span class="pl-s"><span class="pl-pds">"</span>v0.2.1<span class="pl-pds">"</span></span>
+REALI_TL_SCANNER_URL=<span class="pl-s"><span class="pl-pds">"</span>https://github.com/XTLS/RealiTLScanner/releases/download/<span class="pl-smi">${REALI_TL_SCANNER_VERSION}</span>/RealiTLScanner-linux-64<span class="pl-pds">"</span></span>
+REALI_TL_SCANNER_BIN=<span class="pl-s"><span class="pl-pds">"</span>RealiTLScanner-linux-64<span class="pl-pds">"</span></span>
+REALITY_CHECKER_BIN=<span class="pl-s"><span class="pl-pds">"</span>reality-checker<span class="pl-pds">"</span></span></pre></div>
+<ul>
+<li><code class="notranslate">set -e</code>：只要有命令失败（退出码非 0），脚本就直接终止，避免后面步骤在异常状态下继续乱跑。</li>
+<li>几个变量是 RealiTLScanner 和 RealityChecker 的下载地址和文件名。后面都用这些变量，不用硬编码。</li>
+</ul>
+<p>颜色变量只是为了日志输出有红/绿/黄等颜色，方便你在终端看。</p>
+<hr>
+<h3>1. 日志、错误、清理函数</h3>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-en">log</span>() { ... }          <span class="pl-c"><span class="pl-c">#</span> 输出到屏幕，同时写入 reality-check.log</span>
+<span class="pl-en">error_exit</span>() { ... }   <span class="pl-c"><span class="pl-c">#</span> 输出红色错误信息，然后 exit 1</span>
+<span class="pl-en">cleanup</span>() { ... }      <span class="pl-c"><span class="pl-c">#</span> 删除下载的二进制和 zip 包</span></pre></div>
+<ul>
+<li><code class="notranslate">log</code>：所有重要信息都用这个函数，既能在屏幕看到，又会写入 <code class="notranslate">${LOG_FILE}</code>。</li>
+<li><code class="notranslate">error_exit</code>：遇到致命情况（如不是 root、找不到包管理器等）就报错并退出。</li>
+<li><code class="notranslate">cleanup</code>：脚本结束时（无论成功还是失败）都会执行，用于删掉：
+<ul>
+<li><code class="notranslate">RealiTLScanner-linux-64</code></li>
+<li><code class="notranslate">reality-checker</code></li>
+<li><code class="notranslate">reality-checker-linux-*.zip</code><br>
+保持目录干净，只留下日志和扫描 CSV 结果。</li>
+</ul>
+</li>
+</ul>
+<p>最后用：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c1">trap</span> cleanup EXIT</pre></div>
+<p>保证脚本退出时自动清理。</p>
+<hr>
+<h3>2. 自动检测包管理器并安装依赖</h3>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-en">install_dependencies</span>() {
+    <span class="pl-k">local</span> pkgs=<span class="pl-s"><span class="pl-pds">"</span>unzip curl wget coreutils<span class="pl-pds">"</span></span>
+
+    <span class="pl-k">if</span> <span class="pl-c1">command</span> -v apt-get <span class="pl-k">&amp;</span><span class="pl-k">&gt;</span> /dev/null<span class="pl-k">;</span> <span class="pl-k">then</span>
+        ...
+    <span class="pl-k">elif</span> <span class="pl-c1">command</span> -v dnf <span class="pl-k">&amp;</span><span class="pl-k">&gt;</span> /dev/null<span class="pl-k">;</span> <span class="pl-k">then</span>
+        ...
+    <span class="pl-k">elif</span> <span class="pl-c1">command</span> -v yum <span class="pl-k">&amp;</span><span class="pl-k">&gt;</span> /dev/null<span class="pl-k">;</span> <span class="pl-k">then</span>
+        ...
+    <span class="pl-k">elif</span> <span class="pl-c1">command</span> -v pacman <span class="pl-k">&amp;</span><span class="pl-k">&gt;</span> /dev/null<span class="pl-k">;</span> <span class="pl-k">then</span>
+        ...
+    <span class="pl-k">else</span>
+        error_exit <span class="pl-s"><span class="pl-pds">"</span>未能检测到支持的包管理器...<span class="pl-pds">"</span></span>
+    <span class="pl-k">fi</span>
+}</pre></div>
+<p>这一步做的事情：</p>
+<ul>
+<li>检测你的系统是：
+<ul>
+<li>Debian/Ubuntu: <code class="notranslate">apt-get</code></li>
+<li>Fedora/RHEL: <code class="notranslate">dnf</code></li>
+<li>CentOS: <code class="notranslate">yum</code></li>
+<li>Arch: <code class="notranslate">pacman</code></li>
+</ul>
+</li>
+<li>然后安装工具：<code class="notranslate">unzip curl wget coreutils</code><br>
+其中：
+<ul>
+<li><code class="notranslate">curl</code>：获取公网 IP</li>
+<li><code class="notranslate">wget</code>：下载 RealiTLScanner 和 RealityChecker</li>
+<li><code class="notranslate">unzip</code>：解压 RealityChecker 的 zip</li>
+<li><code class="notranslate">coreutils</code>：保证有 <code class="notranslate">timeout</code> 等工具（某些极精简系统可能缺）</li>
+</ul>
+</li>
+</ul>
+<p>如果一个包管理器都没检测到，就直接报错退出，让你手动安装这些命令。</p>
+<hr>
+<h3>3. 输出重定向和 root 检查</h3>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c1">exec</span> <span class="pl-k">&amp;</span><span class="pl-k">&gt;</span> <span class="pl-s"><span class="pl-pds">&gt;(</span>tee -a <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${LOG_FILE}</span><span class="pl-pds">"</span></span><span class="pl-pds">)</span></span>
+<span class="pl-c1">exec</span> <span class="pl-k">2&gt;&amp;1</span></pre></div>
+<ul>
+<li>把标准输出和标准错误都重定向到 <code class="notranslate">tee</code>，即：
+<ul>
+<li>所有输出打印到屏幕</li>
+<li>同时追加写入 <code class="notranslate">reality-check.log</code></li>
+</ul>
+</li>
+</ul>
+<p>然后：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-k">if</span> [ <span class="pl-s"><span class="pl-pds">"</span><span class="pl-s"><span class="pl-pds">$(</span>id -u<span class="pl-pds">)</span></span><span class="pl-pds">"</span></span> <span class="pl-k">-ne</span> 0 ]<span class="pl-k">;</span> <span class="pl-k">then</span>
+   error_exit <span class="pl-s"><span class="pl-pds">"</span>此脚本需要以 root 权限运行。<span class="pl-pds">"</span></span>
+<span class="pl-k">fi</span></pre></div>
+<ul>
+<li>检查当前用户是否是 root（<code class="notranslate">id -u</code> 为 0）。</li>
+<li>不是 root 就直接报错退出。<br>
+原因：后面要用包管理器安装软件，需要 root 权限。</li>
+</ul>
+<hr>
+<h3>4. 获取本机公网 IP</h3>
+<div class="highlight highlight-source-shell"><pre class="notranslate">My_Ip=<span class="pl-s"><span class="pl-pds">$(</span>curl -s https://api.ipify.org<span class="pl-pds">)</span></span>
+<span class="pl-k">if</span> [ <span class="pl-k">-z</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${My_Ip}</span><span class="pl-pds">"</span></span> ]<span class="pl-k">;</span> <span class="pl-k">then</span>
+    error_exit <span class="pl-s"><span class="pl-pds">"</span>无法获取服务器的公网IP地址。<span class="pl-pds">"</span></span>
+<span class="pl-k">fi</span>
+Reality_Ip=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${My_Ip}</span><span class="pl-pds">"</span></span></pre></div>
+<ul>
+<li>调用 <code class="notranslate">https://api.ipify.org</code> 获取当前主机的公网 IP。</li>
+<li>如果拿不到公网 IP 就终止。</li>
+<li>把这个 IP 存在 <code class="notranslate">My_Ip</code> 和 <code class="notranslate">Reality_Ip</code> 中，后面扫描和命名结果文件都用这个 IP。</li>
+</ul>
+<p>这里的假设是：<br>
+你要检测的目标就是「当前这台服务器的公网 IP:443」。</p>
+<hr>
+<h3>5. 下载并准备 RealiTLScanner</h3>
+<div class="highlight highlight-source-shell"><pre class="notranslate">wget -q --show-progress -O <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${REALI_TL_SCANNER_BIN}</span><span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${REALI_TL_SCANNER_URL}</span><span class="pl-pds">"</span></span>
+chmod +x <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${REALI_TL_SCANNER_BIN}</span><span class="pl-pds">"</span></span></pre></div>
+<ul>
+<li>从 GitHub release 下载 <code class="notranslate">RealiTLScanner-linux-64</code> v0.2.1。</li>
+<li>加执行权限，后面直接 <code class="notranslate">./RealiTLScanner-linux-64</code> 运行。</li>
+</ul>
+<hr>
+<h3>6. 运行 RealiTLScanner</h3>
+<div class="highlight highlight-source-shell"><pre class="notranslate">timeout 3m ./<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${REALI_TL_SCANNER_BIN}</span><span class="pl-pds">"</span></span> -addr <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${My_Ip}</span><span class="pl-pds">"</span></span> -port 443 -thread 100 -timeout 5 -out <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${Reality_Ip}</span>.csv<span class="pl-pds">"</span></span> \
+    <span class="pl-k">||</span> log <span class="pl-s"><span class="pl-pds">"</span>RealiTLScanner 运行超时或被中断...<span class="pl-pds">"</span></span></pre></div>
+<p>参数含义：</p>
+<ul>
+<li>
+<code class="notranslate">timeout 3m</code>：最多运行 3 分钟，避免长时间卡住。</li>
+<li>
+<code class="notranslate">-addr "${My_Ip}"</code>：目标地址 = 这台服务器的公网 IP。</li>
+<li>
+<code class="notranslate">-port 443</code>：目标端口 = 443（默认 HTTPS / Reality 一般伪装端口）。</li>
+<li>
+<code class="notranslate">-thread 100</code>：使用 100 个并发线程扫描。</li>
+<li>
+<code class="notranslate">-timeout 5</code>：单次连接超时 5 秒。</li>
+<li>
+<code class="notranslate">-out "${Reality_Ip}.csv"</code>：把扫描结果输出为一个 CSV 文件，文件名形如 <code class="notranslate">x.x.x.x.csv</code>。</li>
+</ul>
+<p>后面用了 <code class="notranslate">|| log "..."</code>：</p>
+<ul>
+<li>这意味即便扫描命令因为 <code class="notranslate">timeout</code> 或其它错误退出（非 0），脚本不会因为 <code class="notranslate">set -e</code> 直接终止，而是只打印一条黄色提示。</li>
+<li>也就是说：RealiTLScanner 失败/超时不被视为致命错误，脚本会继续往下执行。</li>
+</ul>
+<hr>
+<h3>7. 根据架构下载 RealityChecker</h3>
+<div class="highlight highlight-source-shell"><pre class="notranslate">ARCH=<span class="pl-s"><span class="pl-pds">$(</span>uname -m<span class="pl-pds">)</span></span>
+<span class="pl-k">if</span> [ <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$ARCH</span><span class="pl-pds">"</span></span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>x86_64<span class="pl-pds">"</span></span> ]<span class="pl-k">;</span> <span class="pl-k">then</span>
+    REALITY_CHECKER_URL=<span class="pl-s"><span class="pl-pds">"</span>...amd64.zip<span class="pl-pds">"</span></span>
+    wget ...
+    unzip -o reality-checker-linux-amd64.zip
+<span class="pl-k">elif</span> [ <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$ARCH</span><span class="pl-pds">"</span></span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>aarch64<span class="pl-pds">"</span></span> ]<span class="pl-k">;</span> <span class="pl-k">then</span>
+    REALITY_CHECKER_URL=<span class="pl-s"><span class="pl-pds">"</span>...arm64.zip<span class="pl-pds">"</span></span>
+    wget ...
+    unzip -o reality-checker-linux-arm64.zip
+<span class="pl-k">else</span>
+    error_exit <span class="pl-s"><span class="pl-pds">"</span>不支持的系统架构: <span class="pl-smi">$ARCH</span><span class="pl-pds">"</span></span>
+<span class="pl-k">fi</span>
+chmod +x <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${REALITY_CHECKER_BIN}</span><span class="pl-pds">"</span></span></pre></div>
+<ul>
+<li><code class="notranslate">uname -m</code> 检查 CPU 架构：
+<ul>
+<li><code class="notranslate">x86_64</code> → 下载 amd64 版本的 RealityChecker。</li>
+<li><code class="notranslate">aarch64</code> → 下载 arm64 版本。</li>
+</ul>
+</li>
+<li>下载完成后解压 zip，得到 <code class="notranslate">reality-checker</code> 二进制。</li>
+<li>不支持的架构直接退出。</li>
+</ul>
+<hr>
+<h3>8. 用 RealityChecker 分析 CSV</h3>
+<div class="highlight highlight-source-shell"><pre class="notranslate">./<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${REALITY_CHECKER_BIN}</span><span class="pl-pds">"</span></span> csv <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${Reality_Ip}</span>.csv<span class="pl-pds">"</span></span></pre></div>
+<ul>
+<li>使用 RealityChecker 对前面 RealiTLScanner 生成的 <code class="notranslate">${Reality_Ip}.csv</code> 做进一步检查。</li>
+<li>具体输出内容取决于 RealityChecker 实现，一般会检查：
+<ul>
+<li>哪些 IP/连接特征像是正常网站（适合做 Reality 伪装）；</li>
+<li>TLS 指纹、域名、证书相关信息；</li>
+<li>可能会给出评分或是否适配 Reality 的判断。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>9. 结束信息 + 文件说明</h3>
+<p>脚本结束时会提示：</p>
+<ul>
+<li>日志文件：<code class="notranslate">reality-check.log</code></li>
+<li>扫描结果 CSV：<code class="notranslate">&lt;你的公网 IP&gt;.csv</code></li>
+</ul>
+<p>下载的工具和 zip 都在 <code class="notranslate">cleanup</code> 里被删掉了，不会留在当前目录。</p>
+<hr>
+<h2>二、你应该如何使用这个脚本</h2>
+<h3>1. 前置条件</h3>
+<ol>
+<li>你要检测的服务器上：
+<ul>
+<li>是 Linux（Debian/Ubuntu/CentOS/Fedora/Arch 等常见发行版之一）。</li>
+<li>能访问 GitHub（或者你自己提前下载好这些二进制，改脚本用本地路径）。</li>
+<li>能访问 <code class="notranslate">https://api.ipify.org</code> 获取公网 IP（或你自己改为固定 IP）。</li>
+</ul>
+</li>
+<li>你的 Reality 节点（或你想测试的服务）监听在：
+<ul>
+<li>本机公网 IP：<code class="notranslate">My_Ip</code></li>
+<li>端口：<code class="notranslate">443</code>（如果你用的是其他端口，需要改脚本里 <code class="notranslate">-port 443</code> 那一行）。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3>2. 步骤：保存、赋权、执行</h3>
+<p>假设你把脚本保存为 <code class="notranslate">reality-check.sh</code>：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 1. 上传脚本到服务器，例如 /root 目录</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 2. 给执行权限</span>
+chmod +x reality-check.sh
+
+<span class="pl-c"><span class="pl-c">#</span> 3. 以 root 身份执行（非常关键）</span>
+sudo ./reality-check.sh
+<span class="pl-c"><span class="pl-c">#</span> 或者</span>
+su -
+./reality-check.sh</pre></div>
+<p>执行过程中：</p>
+<ul>
+<li>它会自动：
+<ul>
+<li>安装依赖（可能会执行 <code class="notranslate">apt-get update</code> / <code class="notranslate">yum install</code> 等）。</li>
+<li>自动检测你的公网 IP。</li>
+<li>下载 RealiTLScanner 和 RealityChecker。</li>
+<li>执行扫描和校验。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>3. 执行完之后，你要看什么</h3>
+<p>脚本跑完以后，在当前目录会留下：</p>
+<ol>
+<li>日志文件：<code class="notranslate">reality-check.log</code>
+<ul>
+<li>包含整个过程的详细输出。</li>
+<li>如果出现问题，先看这个文件。</li>
+</ul>
+</li>
+<li>扫描结果：<code class="notranslate">&lt;你的公网 IP&gt;.csv</code>
+<ul>
+<li>这是 RealiTLScanner 的原始扫描结果。</li>
+<li>RealityChecker 会基于这个 CSV 做进一步分析。</li>
+<li>你可以用 <code class="notranslate">cat</code>/<code class="notranslate">less</code>/<code class="notranslate">vim</code> 或下载到本地用 Excel / LibreOffice 打开查看。</li>
+</ul>
+</li>
+</ol>
+<p>RealityChecker 本身的输出会直接打印在终端，同时也写入 <code class="notranslate">reality-check.log</code>。</p>
+<hr>
+<h3>4. 如果你要改为检测其他 IP 或端口</h3>
+<p>脚本默认检测：</p>
+<ul>
+<li>IP：本机通过 <code class="notranslate">api.ipify.org</code> 获取的公网 IP</li>
+<li>端口：443</li>
+</ul>
+<p>如果你想检测别的目标，比如：</p>
+<ul>
+<li>同机但非 443 端口；</li>
+<li>其它服务器的 IP；</li>
+</ul>
+<p>可以手动改脚本下列位置：</p>
+<ol>
+<li>
+<p>修改 IP：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 原来：</span>
+My_Ip=<span class="pl-s"><span class="pl-pds">$(</span>curl -s https://api.ipify.org<span class="pl-pds">)</span></span>
+Reality_Ip=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${My_Ip}</span><span class="pl-pds">"</span></span>
+<span class="pl-c"><span class="pl-c">#</span> 例如你想检测 1.2.3.4：</span>
+My_Ip=<span class="pl-s"><span class="pl-pds">"</span>1.2.3.4<span class="pl-pds">"</span></span>
+Reality_Ip=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${My_Ip}</span><span class="pl-pds">"</span></span></pre></div>
+</li>
+<li>
+<p>修改端口：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 原来：</span>
+timeout 3m ./<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${REALI_TL_SCANNER_BIN}</span><span class="pl-pds">"</span></span> -addr <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${My_Ip}</span><span class="pl-pds">"</span></span> -port 443 ...
+<span class="pl-c"><span class="pl-c">#</span> 比如你 Reality 服务在 8443 端口：</span>
+timeout 3m ./<span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${REALI_TL_SCANNER_BIN}</span><span class="pl-pds">"</span></span> -addr <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${My_Ip}</span><span class="pl-pds">"</span></span> -port 8443 ...</pre></div>
+</li>
+</ol>
+<hr>
+<h3>5. 出问题时的排查思路</h3>
+<p>如果脚本中断或结果为空，大致分几类问题：</p>
+<ol>
+<li>无法获取公网 IP：
+<ul>
+<li>防火墙或网络限制访问 <code class="notranslate">api.ipify.org</code>。</li>
+<li>可改成固定 IP 或换其它 IP API。</li>
+</ul>
+</li>
+<li>无法下载 GitHub 资源：
+<ul>
+<li>访问 GitHub 被墙或不稳定。</li>
+<li>需要挂代理或提前手动下载二进制。</li>
+</ul>
+</li>
+<li>扫描结果 CSV 为空或 RealityChecker 报错：
+<ul>
+<li>目标 IP:端口 实际上没有正常的 TLS 服务（如端口没开或不是 TLS）。</li>
+<li>Reality 服务配置错误，握手不成功。</li>
+</ul>
+</li>
+<li>依赖安装失败：
+<ul>
+<li>源不可用、系统极度精简缺少包管理工具。</li>
+<li>需要你手动装好 <code class="notranslate">curl wget unzip timeout</code> 这些基础工具。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p>如果你后面想，我可以帮你基于 RealityChecker 的输出一起分析：<br>
+“这个 IP/端口适不适合作为 Reality 伪装站，用来当伪装网站 / 中转”。</p>
+<hr>
+<p>Powered by [<a href="https://www.chatgptexporter.com/" rel="nofollow">ChatGPT Exporter</a>](<a href="https://www.chatgptexporter.com" rel="nofollow">https://www.chatgptexporter.com</a>)</p>
+<p><a href="https://github.com/user-attachments/files/23604061/ChatGPT-reality.md">ChatGPT-reality选址脚本解释及使用.md</a></p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://HollowCrown2023.github.io/HollowCrown.github.io">HollowCrown-Since 2023，start from 2025-11-16</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","HollowCrown2023/HollowCrown.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekTOC.js'></script><script src='https://blog.meekdai.com/Gmeek/plugins/lightbox.js'></script><script>MathJax = {tex: {inlineMath: [["$", "$"]]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</html>
