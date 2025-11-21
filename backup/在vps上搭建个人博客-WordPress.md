@@ -9,4 +9,6 @@ tip：复制B站分享链接时选择”嵌入代码“一项
 博主的网页
 `Gmeek-html<iframe src="https://kejilion.pro/" width="100%" height="460px" frameborder="0" allowfullscreen="true"></iframe>`
 
+# 补充：一个问题记录
 
+今天Megabox 443端口搭的节点不正常，小火箭中：tcp正常，使用connect测试时不通，在电脑上访问网页时没事，访问GPT总是加载不出来
